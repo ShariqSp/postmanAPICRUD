@@ -37,9 +37,15 @@ public class UserServiceImpl implements UserService {
         }).orElse(null);
     }
 
+   
     @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public boolean deleteUser(Long id) {
+        try {
+            userRepository.deleteById(id);
+            return true; // Deletion was successful
+        } catch (Exception e) {
+            return false; // Deletion failed, user not found or other error
+        }
     }
 
     @Override
